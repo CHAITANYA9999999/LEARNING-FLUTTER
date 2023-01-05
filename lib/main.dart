@@ -1,6 +1,12 @@
+import 'package:app/quiz.dart';
 import 'package:flutter/material.dart';
 import './questions.dart';
 import './answers.dart';
+import './quiz1.dart';
+
+//final is keyword assigned to a variable whose value is constant at runtime
+//const is a keyword assigned to a variable whose value is constant at compiletime as well as runtime
+//you give the const variable value in the code only now that is fixed
 
 void main() {
   runApp(MyApp());
@@ -21,8 +27,27 @@ class MyApp extends StatefulWidget {
 // "main.dart" can access these classes and variables
 
 class _MyAppState extends State<MyApp> {
+  final _questions = const [
+    //this is a map
+    {
+      "QuestionText": "Whats your favourite color?",
+      "answers": ["red", "blue", "yellow", "pink"]
+    },
+    {
+      "QuestionText": "Whats your favourite animal?",
+      "answers": ["monkey", "mouse", "rabbit", "snake"]
+    },
+    {
+      "QuestionText": "Whats your favourite keyboard?",
+      "answers": ["membrane", "mechanical", "both", "none"]
+    },
+  ];
   var _questionIndex = 0;
-  void answerQuestion() {
+  void _answerQuestion() {
+    if (_questionIndex < _questions.length) {
+      print("We have more index!");
+    }
+
     setState(() {
       _questionIndex += 1;
     });
@@ -33,55 +58,14 @@ class _MyAppState extends State<MyApp> {
   //class, it is written just to make our code more understandable
   @override
   Widget build(BuildContext context) {
-    var question = [
-      //this is a map
-      {
-        'QuestionText': 'Whats your favourite coFGlor?',
-        'answers': ['red', 'blue', 'yellow', 'pink']
-      },
-      {
-        'QuestionText': 'Whats your favourite animal?',
-        'answers': ['monkey', 'mouse', 'rabbit', 'snake']
-      },
-      {
-        'QuestionText': 'Whats your favourite keyboard?',
-        'answers': ['membrane', 'mechanical', 'both', 'none']
-      },
-    ];
-
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(
-          title: const Text('THIS IS MY FIRST APP'),
-        ),
-        body: Column(
-          children: [
-            Question(
-              question[_questionIndex]['QuestionText'],
-            ),
-            // ElevatedButton(
-            //   onPressed: answerQuestion,
-            //   child: Text('Answer 1'),
-            // ),
-            // ElevatedButton(
-            //   onPressed: answerQuestion,
-            //   child: Text('Answer 2'),
-            // ),
-            // ElevatedButton(
-            //   onPressed: answerQuestion,
-            //   child: Text('Answer 3'),
-            // ),
-            // ElevatedButton(
-            //   onPressed: answerQuestion,
-            //   child: Text('Answer 4'),
-            // ),
-            Answer(answerQuestion),
-            Answer(answerQuestion),
-            // Answer(answerQuestion),
-            // Answer(answerQuestion)
-          ],
-        ),
-      ),
+          appBar: AppBar(
+            title: const Text('THIS IS MY FIRST APP'),
+          ),
+          body: (_questionIndex < _questions.length)
+              ? Quiz(_answerQuestion, _questions, _questionIndex)
+              : const Center(child: Text("NO MORE QUESTIONS"))),
     );
   }
 }
@@ -95,3 +79,6 @@ class _MyAppState extends State<MyApp> {
 
 //   Person({this.name, this.age});
 // }
+
+//if I write String str = "hello", it means that it is string
+//but if I write String? str = "hello", it means that it is a string but it can also be null
