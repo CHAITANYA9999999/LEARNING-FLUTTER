@@ -3,7 +3,7 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
 class Question extends StatelessWidget {
-  final questionText;
+  final String questionText;
 
   Question(this.questionText);
 
