@@ -39,14 +39,14 @@ class Result extends StatelessWidget {
           ),
           TextButton(
               onPressed: resetHandler,
-              child: Text(
-                'fds',
+              child: const Text(
+                'Reset Quiz',
                 style: TextStyle(
                   color: Colors.blueGrey,
                   fontSize: 30,
                   fontWeight: FontWeight.bold,
                 ),
-              ))
+              )),
         ],
       ),
     );
